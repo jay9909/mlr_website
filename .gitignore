@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Google Cloud-related Files
+*_auth_key.json
+
+# Miscellaneous
+*.swp
+.idea/
+
+
+

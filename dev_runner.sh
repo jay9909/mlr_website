@@ -40,7 +40,7 @@ if [ "${booleans['s']}" ] ; then
   export CLOUD_SQL_CONNECTION_NAME=major-league-redditball-327:us-east4:redditball-db
   export DB_USER=devserver
   export FLASK_SECRET_KEY_SECRET=projects/822174088809/secrets/flask_secret_key/versions/latest
-  export DB_PWD_SECRET=projects/822174088809/secrets/redditball-sql-instance-devserver-passwor
+  export DB_PWD_SECRET=projects/822174088809/secrets/redditball-sql-instance-devserver-password/versions/latest
   export DB_NAME=redditball_dev
 
   flask run
