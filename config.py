@@ -17,11 +17,18 @@ class Config:
     CLOUD_SQL_PASSWORD_SECRET = environ.get('DB_PWD_SECRET')
 
     # Database
-    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI')
-    SQLALCHEMY_ECHO = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
     DB_SOCKET_DIR = environ.get('DB_SOCKET_DIR')
     CLOUD_SQL_CONNECTION_NAME = environ.get('CLOUD_SQL_CONNECTION_NAME')
     DB_USER = environ.get('DB_USER')
     DB_NAME = environ.get('DB_NAME')
     DB_PASS = ''  # Populated via SecretManager during app startup
+    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql:///{DB_NAME}?unix_socket={DB_SOCKET_DIR}'
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Call after setting DB_PASS after secret fetch
+
+
+def set_db_uri():
+    Config.SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://devserver@/{Config.DB_NAME}?unix_socket={Config.DB_SOCKET_DIR}&password={Config.DB_PASS}'
+

@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
+{% block content %}
   <h1>Major League Redditball</h1>
 
-</body>
-</html>
+    <h3 style="color: {{ team.color }}">Oakland Athletics</h3>
+    <img src="{{ team.logo_url }}">
+{% endblock %}

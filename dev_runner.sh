@@ -36,7 +36,7 @@ if [ "${booleans['s']}" ] ; then
   export PORT=8080
 
   # Database Connection Env Variables
-  export DB_SOCKET_DIR=cloudsql
+  export DB_SOCKET_DIR=cloudsql/major-league-redditball-327:us-east4:redditball-db
   export CLOUD_SQL_CONNECTION_NAME=major-league-redditball-327:us-east4:redditball-db
   export DB_USER=devserver
   export FLASK_SECRET_KEY_SECRET=projects/822174088809/secrets/flask_secret_key/versions/latest
