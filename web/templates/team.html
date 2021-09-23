@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    .team-color {
+    color: #{{ team.color }};
+    }
+{% endblock %}
+
+{% block content %}
+    <h1>Major League Redditball</h1>
+
+    <h3 class="team-color">{{ team.name }}</h3>
+    <p><img src="{{ team.logo_url }}" alt="{{ team.name }} logo"></p>
+
+    <ul>
+        {% for player in team.roster %}
+            <li>{{ player.playerName }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

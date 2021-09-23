@@ -1,8 +1,12 @@
 {% extends 'layout.html' %}
 
+{% block styles %}
+
+{% endblock %}
+
 {% block content %}
   <h1>Major League Redditball</h1>
 
-    <h3 style="color: #{{ team.color }}">Oakland Athletics</h3>
-    <img src="{{ team.logo_url }}">
+    <a href="/teams">List of all MLR Teams</a>
+
 {% endblock %}

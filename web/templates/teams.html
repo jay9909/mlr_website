@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {% for team in teams %}
+        .{{ team.abb }} {
+            color: #{{ team.color }};
+        }
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+  <h1>Major League Redditball</h1>
+
+    {% for team in teams %}
+    <p>
+        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo">
+        <a href="/team/{{ team.abb }}">{{ team.name }}</a>
+    </p>
+    {% endfor %}
+
+{% endblock %}
