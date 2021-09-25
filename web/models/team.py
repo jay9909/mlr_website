@@ -1,5 +1,5 @@
 from web import db
-
+from ..models.park import Park
 
 class Team(db.Model):
     """Data model for an MLR Team"""
@@ -29,3 +29,18 @@ class Team(db.Model):
                      nullable=False)
 
     roster = db.relationship('Player', backref='team_ref', lazy=True)
+
+    def get_park(self):
+        park = Park.query.filter(
+            Park.team == self.abb
+        ).first()
+
+        if park is None:
+            park = Park.query.filter(
+                Park.team == 'NEU'
+            ).first()
+
+            if park is None:
+                raise Exception(f"Could not fetch park details for team {self.abb} OR neutral park.")
+
+        return park

@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from ..models.team import Team
 from ..models.player import Player
 
+
 # Blueprint Configuration
 index_bp = Blueprint(
     'index_bp', __name__,
@@ -41,10 +42,13 @@ def team(team_abbr):
     if team_rec is None:
         raise Exception("Team could not be fetched")
 
+    park = team_rec.get_park()
+
     return render_template(
         'team.html',
         title="Major League Redditball: Fake Baseball, Real Community",
-        team=team_rec
+        team=team_rec,
+        park=park
     )
 
 

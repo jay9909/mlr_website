@@ -3,6 +3,7 @@ from web import db
 
 class Range(db.Model):
     __tablename__ = 'ranges'
+    __table_args__ = {'extend_existing': True}
 
     abbr = db.Column(db.VARCHAR(length=3),
                      primary_key=True,

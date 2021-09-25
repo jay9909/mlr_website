@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    .team-color {
+    color: #{{ team.color }};
+    }
+
+    .park-details {
+        text-align: center;
+        border: 1px solid black;
+        margin-bottom: 1em;
+    }
+
+    .park-details > caption {
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .park-details > tr {
+        border: 1px solid black;
+    }
+
+    .park-details > thead {
+        font-weight: bold;
+    }
+
+    .park-details td {
+        min-width: 4em;
+        border: 1px solid black;
+        padding: .25em;
+    }
+
+    .park-details .left {
+        text-align: left;
+        padding-left: .5em;
+        padding-right: 2em;
+    }
+
+{% endblock %}
+
+{% block content %}
+    <h1>Major League Redditball</h1>
+
+    <h2 class="team-color">{{ team.name }}</h2>
+    <p><img src="{{ team.logo_url }}" alt="{{ team.name }} logo"></p>
+
+    <h4>Park Details</h4>
+    <table class="park-details">
+        <thead><tr>
+            <th class="left">Park Name</th>
+            <th>HR</th>
+            <th>3B</th>
+            <th>2B</th>
+            <th>1B</th>
+            <th>BB</th>
+        </tr></thead>
+        <tr>
+            <td class="left">{{ park.parkName }}</td>
+            <td>{{ park.rangeHR}}</td>
+            <td>{{ park.range3B }}</td>
+            <td>{{ park.range2B }}</td>
+            <td>{{ park.range1B }}</td>
+            <td>{{ park.rangeBB }}</td>
+        </tr>
+    </table>
+
+    <h4>Current Roster</h4>
+    <ul>
+        {% for player in team.roster %}
+            <li><a href="/player/{{ player.playerID }}">{{ player.playerName }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

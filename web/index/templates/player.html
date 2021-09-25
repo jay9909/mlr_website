@@ -2,28 +2,38 @@
 
 {% block styles %}
     .team-color {
-    color: #{{ player.get_team().color }};
+        color: #{{ player.get_team().color }};
     }
 
     .range-table {
-    text-align: center;
-    border: 1px solid black;
-    margin-bottom: 1em;
+        text-align: center;
+        border: 1px solid black;
+        margin-bottom: 1em;
     }
 
     .range-table > caption {
-    text-align: left;
-    font-weight: bold;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .range-table > thead {
+        font-weight: bold;
     }
 
     .range-table > tr {
-    border: 1px solid black;
+        border: 1px solid black;
     }
 
     .range-table td {
         min-width: 3em;
         border: 1px solid black;
         padding: .25em;
+    }
+
+    .range-table .left {
+        text-align: left;
+        padding-right: 2em;
+        padding-right: 2em;
     }
 {% endblock %}
 
@@ -32,18 +42,19 @@
 
     <table class="range-table">
         <caption>Batting Ranges</caption>
-        <tr>
-            <td>HR</td>
-            <td>3B</td>
-            <td>2B</td>
-            <td>1B</td>
-            <td>BB</td>
-            <td>FO</td>
-            <td>K</td>
-            <td>PO</td>
-            <td>RGO</td>
-            <td>LGO</td>
-        </tr>
+        <thead><tr>
+
+            <th>HR</th>
+            <th>3B</th>
+            <th>2B</th>
+            <th>1B</th>
+            <th>BB</th>
+            <th>FO</th>
+            <th>K</th>
+            <th>PO</th>
+            <th>RGO</th>
+            <th>LGO</th>
+        </tr></thead>
 
         <tr>
             {% for range in player.get_batting_ranges() %}
@@ -55,27 +66,27 @@
     {% if player.pitchType != None %}
         <table class="range-table">
             <caption>Pitching Ranges</caption>
-            <tr>
-                <td></td>
-                <td>HR</td>
-                <td>3B</td>
-                <td>2B</td>
-                <td>1B</td>
-                <td>BB</td>
-                <td>FO</td>
-                <td>K</td>
-                <td>PO</td>
-                <td>RGO</td>
-                <td>LGO</td>
-            </tr>
+            <thead><tr>
+                <th class="left"></th>
+                <th>HR</th>
+                <th>3B</th>
+                <th>2B</th>
+                <th>1B</th>
+                <th>BB</th>
+                <th>FO</th>
+                <th>K</th>
+                <th>PO</th>
+                <th>RGO</th>
+                <th>LGO</th>
+            </tr></thead>
 
             {% for set in player.get_pitching_ranges() %}
                 <tr>
                     {% if loop.first %}
-                        <td>No Hand Bonus</td>
+                        <td class="left">Neutral Ranges</td>
                     {% endif %}
                     {% if loop.last %}
-                        <td>With hand Bonus</td>
+                        <td class="left"> + Hand Bonus</td>
                     {% endif %}
                     {% for range in set %}
                         <td>{{ range }}</td>
