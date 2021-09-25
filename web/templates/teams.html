@@ -30,12 +30,13 @@
             {% for (key, team) in leeg.items() %}
                 {% if key != 'leeg_name'  %}
                     <div class="team-link">
-                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" height="100px"><br />
-                        <a href="/team/{{ team.abb }}" class="{{ team.abb }}">{{ team.name }}</a>
+                        <a href="/team/{{ team.abb }}" class="{{ team.abb }}">
+                            <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" height="100px"><br />
+                            {{ team.name }}
+                        </a>
                     </div>
                 {% endif %}
             {% endfor %}
         </div>
     {% endfor %}
-
 {% endblock %}
