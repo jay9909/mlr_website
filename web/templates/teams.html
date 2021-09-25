@@ -6,16 +6,36 @@
             color: #{{ team.color }};
         }
     {% endfor %}
+
+    .grid {
+        display: grid;
+        grid-gap: 1em;
+        grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+
+        margin-bottom: 5em;
+    }
+
+    .team-link {
+
+    }
+
 {% endblock %}
 
 {% block content %}
-  <h1>Major League Redditball</h1>
 
-    {% for team in teams %}
-    <p>
-        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo">
-        <a href="/team/{{ team.abb }}">{{ team.name }}</a>
-    </p>
+    {% for leeg in leegs %}
+    <h1 class="leeg-head">{{ leeg.leeg_name }}</h1>
+
+        <div class="grid">
+            {% for (key, team) in leeg.items() %}
+                {% if key != 'leeg_name'  %}
+                    <div class="team-link">
+                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" height="100px"><br />
+                        <a href="/team/{{ team.abb }}" class="{{ team.abb }}">{{ team.name }}</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     {% endfor %}
 
 {% endblock %}

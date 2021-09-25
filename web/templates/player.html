@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block styles %}
+    .team-color {
+    color: #{{ player.get_team().color }};
+    }
+
+    .range-table {
+    text-align: center;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    }
+
+    .range-table > caption {
+    text-align: left;
+    font-weight: bold;
+    }
+
+    .range-table > tr {
+    border: 1px solid black;
+    }
+
+    .range-table td {
+        min-width: 3em;
+        border: 1px solid black;
+        padding: .25em;
+    }
+{% endblock %}
+
+{% block content %}
+    <h1 class="team-color">{{ player.playerName }}</h1>
+
+    <table class="range-table">
+        <caption>Batting Ranges</caption>
+        <tr>
+            <td>HR</td>
+            <td>3B</td>
+            <td>2B</td>
+            <td>1B</td>
+            <td>BB</td>
+            <td>FO</td>
+            <td>K</td>
+            <td>PO</td>
+            <td>RGO</td>
+            <td>LGO</td>
+        </tr>
+
+        <tr>
+            {% for range in player.get_batting_ranges() %}
+                <td>{{ range }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    {% if player.pitchType != None %}
+        <table class="range-table">
+            <caption>Pitching Ranges</caption>
+            <tr>
+                <td></td>
+                <td>HR</td>
+                <td>3B</td>
+                <td>2B</td>
+                <td>1B</td>
+                <td>BB</td>
+                <td>FO</td>
+                <td>K</td>
+                <td>PO</td>
+                <td>RGO</td>
+                <td>LGO</td>
+            </tr>
+
+            {% for set in player.get_pitching_ranges() %}
+                <tr>
+                    {% if loop.first %}
+                        <td>No Hand Bonus</td>
+                    {% endif %}
+                    {% if loop.last %}
+                        <td>With hand Bonus</td>
+                    {% endif %}
+                    {% for range in set %}
+                        <td>{{ range }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+            <tr></tr>
+        </table>
+    {% endif %}
+
+{% endblock %}

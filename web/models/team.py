@@ -24,5 +24,8 @@ class Team(db.Model):
     webhook_url = db.Column(db.Text,
                             index=False,
                             nullable=False)
+    leeg = db.Column(db.VARCHAR(4),
+                     index=True,
+                     nullable=False)
 
     roster = db.relationship('Player', backref='team_ref', lazy=True)

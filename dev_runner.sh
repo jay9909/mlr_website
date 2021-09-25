@@ -27,21 +27,22 @@ done
 
 export GOOGLE_APPLICATION_CREDENTIALS="dev_secret_manager_auth_key.json"
 
+# Serving Env Variables
+
+# Database Connection Env Variables
+export DB_SOCKET_DIR=cloudsql/major-league-redditball-327:us-east4:redditball-db
+export CLOUD_SQL_CONNECTION_NAME=major-league-redditball-327:us-east4:redditball-db
+export DB_USER=devserver
+export FLASK_SECRET_KEY_SECRET=projects/822174088809/secrets/flask_secret_key/versions/latest
+export DB_PWD_SECRET=projects/822174088809/secrets/redditball-sql-instance-devserver-password/versions/latest
+export DB_NAME=redditball_dev
+
 # Run the dev server if boolean flag "-s" was passed in.
 if [ "${booleans['s']}" ] ; then
-  # Serving Env Variables
   export FLASK_APP=wsgi.py
   export FLASK_ENV=development
   export HOST=0.0.0.0
   export PORT=8080
-
-  # Database Connection Env Variables
-  export DB_SOCKET_DIR=cloudsql/major-league-redditball-327:us-east4:redditball-db
-  export CLOUD_SQL_CONNECTION_NAME=major-league-redditball-327:us-east4:redditball-db
-  export DB_USER=devserver
-  export FLASK_SECRET_KEY_SECRET=projects/822174088809/secrets/flask_secret_key/versions/latest
-  export DB_PWD_SECRET=projects/822174088809/secrets/redditball-sql-instance-devserver-password/versions/latest
-  export DB_NAME=redditball_dev
 
   flask run
 

@@ -17,9 +17,19 @@ def index():
 
 @index_bp.route('/teams', methods=['GET'])
 def teams():
-    team_records = Team.query.all()
+    team_records = Team.query.order_by(Team.leeg.desc()).all()
 
-    return render_template('teams.html', teams=team_records)
+    mlr = {'leeg_name': 'Major League Redditball'}
+    milr = {'leeg_name': 'Minor League Redditball'}
+    leegs = (mlr, milr)
+
+    for team_rec in team_records:
+        if team_rec.leeg == 'MLR':
+            mlr[team_rec.abb] = team_rec
+        else:
+            milr[team_rec.abb] = team_rec
+
+    return render_template('teams.html', leegs=leegs, teams=team_records)
 
 
 @index_bp.route('/team/<team_abbr>', methods=['GET'])
@@ -36,3 +46,19 @@ def team(team_abbr):
         title="Major League Redditball: Fake Baseball, Real Community",
         team=team_rec
     )
+
+
+@index_bp.route('/player/<player_id>/<player_name>', methods=['GET'])
+@index_bp.route('/player/<player_id>/', methods=['GET'])
+def player(player_id, player_name=None):
+    player_rec = Player.query.filter(
+        Player.playerID == player_id
+    ).first()
+
+    if player_rec is None:
+        raise Exception("Player could no be fetched")
+
+    return render_template(
+        'player.html',
+        title=player_rec.playerName,
+        player=player_rec)

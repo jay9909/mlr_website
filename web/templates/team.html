@@ -14,7 +14,7 @@
 
     <ul>
         {% for player in team.roster %}
-            <li>{{ player.playerName }}</li>
+            <li><a href="/player/{{ player.playerID }}">{{ player.playerName }}</a></li>
         {% endfor %}
     </ul>
 
