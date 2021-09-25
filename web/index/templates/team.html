@@ -39,7 +39,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Major League Redditball</h1>
+    <p class="back-links">
+        <a href="{{ url_for('index_bp.index') }}">Home</a> ->
+        <a href="{{ url_for('index_bp.teams') }}">Team list</a>
+    </p>
 
     <h2 class="team-color">{{ team.name }}</h2>
     <p><img src="{{ team.logo_url }}" alt="{{ team.name }} logo"></p>

@@ -38,7 +38,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="team-color">{{ player.playerName }}</h1>
+    <p class="back-links">
+        <a href="{{ url_for('index_bp.index') }}">Home</a> ->
+        <a href="{{ url_for('index_bp.teams') }}">Team list</a> ->
+        <a href="{{ url_for('index_bp.team', team_abbr=player.team) }}">{{ player.team }}</a>
+    </p>
+
+    <h2 class="team-color">{{ player.playerName }}</h2>
 
     <table class="range-table">
         <caption>Batting Ranges</caption>
@@ -97,5 +103,4 @@
             <tr></tr>
         </table>
     {% endif %}
-
 {% endblock %}

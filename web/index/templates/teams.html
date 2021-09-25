@@ -22,9 +22,12 @@
 {% endblock %}
 
 {% block content %}
+    <p class="back-links">
+        <a href="{{ url_for('index_bp.index') }}">Home</a>
+    </p>
 
     {% for leeg in leegs %}
-    <h1 class="leeg-head">{{ leeg.leeg_name }}</h1>
+    <h2 class="leeg-head">{{ leeg.leeg_name }}</h2>
 
         <div class="grid">
             {% for (key, team) in leeg.items() %}

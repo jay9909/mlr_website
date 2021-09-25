@@ -5,12 +5,17 @@
     <title>{{ title }}</title>
 
     <style>
+        .back-links {
+            margin-top: -1em;
+            margin-bottom: 2em;
+        }
+
     {% block styles %}{% endblock %}
     </style>
 </head>
 <body>
-
-{% block content %}{% endblock %}
+    <h1>Major League Redditball</h1>
+    {% block content %}{% endblock %}
 
 </body>
 </html>
