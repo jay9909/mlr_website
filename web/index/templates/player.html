@@ -92,7 +92,7 @@
                         <td class="left">Neutral Ranges</td>
                     {% endif %}
                     {% if loop.last %}
-                        <td class="left"> + Hand Bonus</td>
+                        <td class="left"> + Hand Bonus ({{ player.pitchBonus[:1] }})</td>
                     {% endif %}
                     {% for range in set %}
                         <td>{{ range }}</td>
