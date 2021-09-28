@@ -1,4 +1,5 @@
 """Flask configuration variables."""
+import urllib.parse
 from os import environ
 
 
@@ -26,9 +27,26 @@ class Config:
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Call after setting DB_PASS after secret fetch
+    # Discord App Parameters
+    DISCORD_APP_NAME = environ.get('DISCORD_APP_NAME')
+    DISCORD_APPLICATION_ID = environ.get('DISCORD_APPLICATION_ID')
+    DISCORD_APP_PUBLIC_KEY = environ.get('DISCORD_APP_PUBLIC_KEY')
+    # GCP Secret Manager resource for the Discord client secret
+    DISCORD_CLIENT_SECRET_SECRET = environ.get('DISCORD_CLIENT_SECRET_SECRET')
 
 
 def set_db_uri():
     Config.SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://devserver@/{Config.DB_NAME}?unix_socket={Config.DB_SOCKET_DIR}&password={Config.DB_PASS}'
 
+
+def make_discord_auth_url(base_url):
+    # Protocol, Host, and Path
+    url = 'https://discord.com/api/oauth2/authorize?'
+
+    # Fixed Params
+    url += 'client_id=892172573507477555&response_type=code&scope=identify&'
+
+    # Redirect URL, depends on serving environment
+    url += urllib.parse.quote_plus(f'redirect_uri={base_url}oauth/redirect')
+
+    return url

@@ -37,6 +37,13 @@ export FLASK_SECRET_KEY_SECRET=projects/822174088809/secrets/flask_secret_key/ve
 export DB_PWD_SECRET=projects/822174088809/secrets/redditball-sql-instance-devserver-password/versions/latest
 export DB_NAME=redditball_dev
 
+# Discord App Env Variables
+export DISCORD_APP_NAME=DISCORD_APP_NAME
+export DISCORD_APPLICATION_ID=892172573507477555
+export DISCORD_APP_PUBLIC_KEY=fb10416585e9d29491ac037e281d1fec798ba59d0ae5663fd2b994fbb19df358
+export DISCORD_CLIENT_SECRET_SECRET=projects/822174088809/secrets/discord-client-secret/versions/latest
+
+
 # Run the dev server if boolean flag "-s" was passed in.
 if [ "${booleans['s']}" ] ; then
   export FLASK_APP=wsgi.py
