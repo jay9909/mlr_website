@@ -26,7 +26,7 @@ def get_access_token(code, base_url):
         'client_secret': secret_service.secrets.get_discord_client_secret(),
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': 'base_url'
+        'redirect_uri': 'https://redditball-test-yxax2m5aqa-uk.a.run.app/'
     }
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
