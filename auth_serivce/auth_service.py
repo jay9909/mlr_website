@@ -3,15 +3,16 @@ from flask import current_app, request, session
 from web import db
 
 
+# Wrapper for requests that checks for a session cookie containing a user, and if so creates a User object
+# with some basic data populated from the cookie.  Request handlers can use the user for further authorization
+# if needed.
+@app.before_request()
 def get_user():
     def _handler_decorator(f):
         @wraps(f)
         def __handler_decorator(*args, **kwargs):
-            # s = session.open_session(current_app, request)
-            # print(session.digest_method())
-            # print(session.key_derivation)
-            # print(session.salt)
-            print(session.setdefault('hello', 'secret world'))
+            session.get('user')
+
 
             result = f(*args, **kwargs)
             return result

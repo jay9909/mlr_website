@@ -11,8 +11,13 @@ def get_db_instance_password():
     return get_secret(Config.CLOUD_SQL_PASSWORD_SECRET)
 
 
+def get_discord_client_id():
+    return get_secret(Config.DISCORD_CLIENT_ID_SECRET)
+
+
 def get_discord_client_secret():
     return get_secret(Config.DISCORD_CLIENT_SECRET_SECRET)
+
 
 def get_secret(secret_key):
     secret_client = secretmanager.SecretManagerServiceClient()

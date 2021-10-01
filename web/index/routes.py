@@ -1,11 +1,13 @@
+import re
+
 from flask import Blueprint, render_template
 
 from ..models.team import Team
 from ..models.player import Player
 from flask import request
+from auth_serivce import auth_service as auth
 from discord_service import discord
 import urllib
-
 
 # Blueprint Configuration
 index_bp = Blueprint(
@@ -16,9 +18,9 @@ index_bp = Blueprint(
 
 
 @index_bp.route('/', methods=['GET'])
+@auth.get_user()
 def index():
     login_url = discord.make_login_url(request.base_url)
-    print(login_url)
 
     return render_template('index.html', login_url=login_url)
 
@@ -68,24 +70,27 @@ def team(team_abbr):
     )
 
 
-@index_bp.route('/player/<player_id>/<player_name>', methods=['GET'])
-@index_bp.route('/player/<player_id>/', methods=['GET'])
-def player(player_id, player_name=None):
-    player_rec = Player.query.filter(
-        Player.playerID == player_id
-    ).first()
+@index_bp.route('/player/<player_reference>/', methods=['GET'])
+def player(player_reference):
+    # Was the parameter an ID (number)
+    id_regex = '[0-9]{1,5}'  # Match a number with 1 to 5 digits
+    if re.fullmatch(id_regex, player_reference) is not None:
+        # Reference was a numeric ID.  Query by that.
+        player_record = Player.query.filter(
+            Player.playerID == player_reference
+        ).first()
+    else:
+        # player_reference is a player's name.  Query by that
+        player_reference = urllib.parse.unquote_plus(player_reference)
+        player_record = Player.query.filter(
+            Player.playerName == player_reference
+        ).first()
 
-    if player_rec is None:
-        raise Exception("Player could no be fetched")
-
-    player_name = urllib.parse.unquote_plus(player_name)
-    if player_name is not None and player_rec.playerName != player_name:
-        print(player_name)
-        print(player_rec.playerName)
-
-        raise Exception(f'Player name in URL ({player_name}) does not match player name in database ({player_rec.playerName})')
+    # We should have a record by now, one way or the other.
+    if player_record is None:
+        raise Exception("Player could no be fetched.")
 
     return render_template(
         'player.html',
-        title=player_rec.playerName,
-        player=player_rec)
+        title=player_record.playerName,
+        player=player_record)

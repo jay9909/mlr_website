@@ -39,7 +39,7 @@ export DB_NAME=redditball_dev
 
 # Discord App Env Variables
 export DISCORD_APP_NAME=mlr_website_dev
-export DISCORD_APPLICATION_ID=892172573507477555
+export DISCORD_CLIENT_ID_SECRET=projects/822174088809/secrets/discord-client-id/versions/latest
 export DISCORD_APP_PUBLIC_KEY=fb10416585e9d29491ac037e281d1fec798ba59d0ae5663fd2b994fbb19df358
 export DISCORD_CLIENT_SECRET_SECRET=projects/822174088809/secrets/discord-client-secret/versions/latest
 

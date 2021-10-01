@@ -10,7 +10,7 @@ db = SQLAlchemy()
 
 
 def init_app():
-    Config.FLASK_SECRET_KEY = secrets.get_flask_secret_key()
+    Config.SECRET_KEY = secrets.get_flask_secret_key()
     Config.DB_PASS = secrets.get_db_instance_password()
     config.set_db_uri()
 

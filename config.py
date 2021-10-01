@@ -6,12 +6,18 @@ from os import environ
 class Config:
     """Set Flask configuration from .env file."""
 
-    # General Config
+    # Flask Config Variables
     FLASK_APP = environ.get('FLASK_APP')
     FLASK_ENV = environ.get('FLASK_ENV', 'production')
-    FLASK_SECRET_KEY = ''  # Populated via SecretManager during app startup
+    SECRET_KEY = ''  # Populated via SecretManager during app startup
     HOST = environ.get('HOST', '0.0.0.0')
     PORT = environ.get('PORT', '8080')
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Strict'
+    if FLASK_ENV == 'development':
+        SESSION_COOKIE_SECURE = False
+    else:
+        SESSION_COOKIE_SECURE = True
 
     # Google Cloud Config
     FLASK_SECRET_KEY_SECRET = environ.get('FLASK_SECRET_KEY_SECRET')
@@ -29,7 +35,7 @@ class Config:
 
     # Discord App Parameters
     DISCORD_APP_NAME = environ.get('DISCORD_APP_NAME')
-    DISCORD_APPLICATION_ID = environ.get('DISCORD_APPLICATION_ID')
+    DISCORD_CLIENT_ID_SECRET = environ.get('DISCORD_CLIENT_ID_SECRET')
     DISCORD_APP_PUBLIC_KEY = environ.get('DISCORD_APP_PUBLIC_KEY')
     # GCP Secret Manager resource for the Discord client secret
     DISCORD_CLIENT_SECRET_SECRET = environ.get('DISCORD_CLIENT_SECRET_SECRET')
