@@ -18,10 +18,8 @@ index_bp = Blueprint(
 
 
 @index_bp.route('/', methods=['GET'])
-@auth.get_user()
 def index():
     login_url = discord.make_login_url(request.base_url)
-
     return render_template('index.html', login_url=login_url)
 
 
