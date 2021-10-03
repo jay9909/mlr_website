@@ -34,19 +34,19 @@ def auth_redirect():
 
 @index_bp.route('/teams', methods=['GET'])
 def teams():
-    team_records = Team.query.order_by(Team.leeg.desc()).all()
+    team_records = Team.query.order_by(Team.league.desc()).all()
 
-    mlr = {'leeg_name': 'Major League Redditball'}
-    milr = {'leeg_name': 'Minor League Redditball'}
-    leegs = (mlr, milr)
+    mlr = {'league_name': 'Major League Redditball'}
+    milr = {'league_name': 'Minor League Redditball'}
+    leagues = (mlr, milr)
 
     for team_rec in team_records:
-        if team_rec.leeg == 'MLR':
+        if team_rec.league == 'mlr':
             mlr[team_rec.abb] = team_rec
         else:
             milr[team_rec.abb] = team_rec
 
-    return render_template('teams.html', leegs=leegs, teams=team_records)
+    return render_template('teams.html', leagues=leagues, teams=team_records)
 
 
 @index_bp.route('/team/<team_abbr>', methods=['GET'])

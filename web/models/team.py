@@ -24,7 +24,7 @@ class Team(db.Model):
     webhook_url = db.Column(db.Text,
                             index=False,
                             nullable=False)
-    leeg = db.Column(db.VARCHAR(4),
+    league = db.Column(db.VARCHAR(4),
                      index=True,
                      nullable=False)
 

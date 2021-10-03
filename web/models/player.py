@@ -1,5 +1,5 @@
 from web import db
-from web.models.range import Range
+from web.models.range import BattingRange, PitchingRange, HandBonus
 from web.models.team import Team
 
 
@@ -37,14 +37,14 @@ class Player(db.Model):
                             unique=True,
                             nullable=True,
                             index=True)
-    FormatNum = db.Column(db.Integer())
+    FormatNum = db.Column('Format#', db.Integer())
     Status = db.Column(db.Integer())
     discordID = db.Column(db.Integer())
 
     def get_batting_ranges(self):
         bat_type = self.batType
-        batting_ranges = Range.query.filter(
-            Range.abbr == bat_type
+        batting_ranges = BattingRange.query.filter(
+            BattingRange.type == bat_type
         ).first()
 
         if batting_ranges is None:
@@ -68,8 +68,8 @@ class Player(db.Model):
         if pitch_type is None:
             return None
 
-        pitching_ranges = Range.query.filter(
-            Range.abbr == pitch_type
+        pitching_ranges = PitchingRange.query.filter(
+            PitchingRange.type == pitch_type
         ).first()
 
         if pitching_ranges is None:
@@ -109,8 +109,8 @@ class Player(db.Model):
         if hand_bonus is None:
             return None
 
-        hand_bonuses = Range.query.filter(
-            Range.abbr == hand_bonus
+        hand_bonuses = HandBonus.query.filter(
+            HandBonus.type == hand_bonus
         ).first()
 
         if hand_bonuses is None:

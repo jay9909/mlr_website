@@ -26,12 +26,12 @@
         <a href="{{ url_for('index_bp.index') }}">Home</a>
     </p>
 
-    {% for leeg in leegs %}
-    <h2 class="leeg-head">{{ leeg.leeg_name }}</h2>
+    {% for league in leagues %}
+    <h2 class="league-head">{{ league.league_name }}</h2>
 
         <div class="grid">
-            {% for (key, team) in leeg.items() %}
-                {% if key != 'leeg_name'  %}
+            {% for (key, team) in league.items() %}
+                {% if key != 'league_name'  %}
                     <div class="team-link">
                         <a href="/team/{{ team.abb }}" class="{{ team.abb }}">
                             <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" height="100px"><br />

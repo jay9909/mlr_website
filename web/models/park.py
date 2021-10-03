@@ -2,7 +2,7 @@ from web import db
 
 
 class Park(db.Model):
-    __tablename__ = 'parks'
+    __tablename__ = 'parkFactors'
     __table_args__ = {'extend_existing': True}
 
     team = db.Column(db.VARCHAR(3),

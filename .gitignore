@@ -128,12 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Google Cloud-related Files
-*_auth_key.json
+# Config files with sensitive variables
+secrets.ini
 
 # Miscellaneous
 *.swp
 .idea/
 
-
-
+/cloud_sql_proxy_auth_key.json

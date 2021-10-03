@@ -1,6 +1,5 @@
 import urllib
 
-from secret_service import secrets
 from config import Config
 import requests
 from datetime import datetime, timedelta
@@ -11,18 +10,18 @@ discord_token_url = 'https://discord.com/api/oauth2/token'
 
 
 def make_login_url(base_url):
-    redirect_url = base_url + 'oauth/redirect'
-    redirect_url = urllib.parse.quote_plus(redirect_url)
+    encoded_base_url = urllib.parse.quote_plus(base_url)
 
-    return (f'{discord_auth_url}?response_type=code&scope=identify&'
-            f'client_id={secrets.get_discord_client_id()}&'
-            f'redirect_uri={redirect_url}')
+    return (f'https://discord.com/api/oauth2/authorize?response_type=code&scope=identify&'
+            f'client_id={Config.DISCORD_CLIENT_ID}&'
+            f'redirect_url={encoded_base_url}/redirect'
+            )
 
 
 def get_access_token(code, base_url):
     data = {
-        'client_id': secrets.get_discord_client_id(),
-        'client_secret': secrets.get_discord_client_secret(),
+        'client_id': Config.DISCORD_CLIENT_ID,
+        'client_secret': Config.DISCORD_CLIENT_SECRET,
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': base_url
