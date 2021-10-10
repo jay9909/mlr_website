@@ -35,7 +35,12 @@ if [ "${booleans['s']}" ] ; then
 
   flask run
 
-# Run a python file directly, provided as an argument to "-t"
+# Run the docker container image provided
+elif [ "${flags['c']}" ] ; then
+  export PORT=8080
+  sudo docker run -p 8080:${PORT} -e PORT=${PORT} "${flags['c']}"
+
+# Run a specific python file directly, provided as an argument to "-t"
 elif [ "${flags['t']}" ] ; then
   python3 "${flags['t']}"
 fi

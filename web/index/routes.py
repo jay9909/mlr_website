@@ -88,7 +88,11 @@ def player(player_reference):
     if player_record is None:
         raise Exception("Player could no be fetched.")
 
+    # Null for free agents and draftees
+    team_record = player_record.get_team()
+
     return render_template(
         'player.html',
         title=player_record.playerName,
-        player=player_record)
+        player=player_record,
+        team=team_record)

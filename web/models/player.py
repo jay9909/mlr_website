@@ -130,11 +130,14 @@ class Player(db.Model):
         ]
 
     def get_team(self):
+        if self.team is None:
+            return None
+
         team_rec = Team.query.filter(
             Team.abb == self.team.upper()
         ).first()
 
         if team_rec is None:
-            raise Exception("Player's team could not be fetched.")
+            raise Exception(f"Player's team could not be fetched")
 
         return team_rec

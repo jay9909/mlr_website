@@ -135,4 +135,4 @@ secrets.ini
 *.swp
 .idea/
 
-/cloud_sql_proxy_auth_key.json
+cloud_sql_proxy_auth_key.json

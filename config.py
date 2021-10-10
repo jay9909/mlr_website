@@ -38,12 +38,3 @@ class Config:
     DISCORD_CLIENT_ID = settings['DISCORD']['CLIENT_ID']
     DISCORD_APP_PUBLIC_KEY = settings['DISCORD']['PUBLIC_KEY']
     DISCORD_CLIENT_SECRET = settings['DISCORD']['CLIENT_SECRET']
-
-
-def make_discord_login_url(base_url):
-    encoded_base_url = urllib.parse.quote_plus(base_url)
-
-    return (f'https://discord.com/api/oauth2/authorize?response_type=code&scope=identify&'
-            f'client_id={Config.DISCORD_CLIENT_ID}&'
-            f'redirect_url={encoded_base_url}/redirect'
-            )

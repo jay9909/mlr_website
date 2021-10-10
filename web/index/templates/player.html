@@ -1,9 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block styles %}
+    {% if team %}
     .team-color {
-        color: #{{ player.get_team().color }};
+        color: #{{ team.color }};
     }
+    {% endif %}
 
     .range-table {
         text-align: center;
@@ -40,8 +42,12 @@
 {% block content %}
     <p class="back-links">
         <a href="{{ url_for('index_bp.index') }}">Home</a> &#8594;
+        {% if team %}
         <a href="{{ url_for('index_bp.teams') }}">Team list</a> &#8594;
         <a href="{{ url_for('index_bp.team', team_abbr=player.team) }}">{{ player.team }}</a>
+        {% else %}
+            FA/Draftee
+        {% endif %}
     </p>
 
     <h2 class="team-color">{{ player.playerName }}</h2>

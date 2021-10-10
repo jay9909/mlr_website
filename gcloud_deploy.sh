@@ -1,0 +1,1 @@
+gcloud run deploy redditball-test --region us-east4 --source .
